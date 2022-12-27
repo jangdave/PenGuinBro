@@ -3,7 +3,9 @@
 
 #include "EnemyDinosaur.h"
 #include "Components/BoxComponent.h"
+#include "BombRange.h"
 #include "Components/StaticMeshComponent.h"
+#include "Kismet/Gameplaystatics.h"
 
 // Sets default values
 AEnemyDinosaur::AEnemyDinosaur()
@@ -24,6 +26,9 @@ AEnemyDinosaur::AEnemyDinosaur()
 void AEnemyDinosaur::BeginPlay()
 {
 	Super::BeginPlay();
+
+	boxComp->OnComponentBeginOverlap.AddDynamic(this, &AEnemyDinosaur::OnOverlap);
+	boxComp->SetGenerateOverlapEvents(true);
 	
 }
 
@@ -45,5 +50,10 @@ void AEnemyDinosaur::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+void AEnemyDinosaur::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	
 }
 
