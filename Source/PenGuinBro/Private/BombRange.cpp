@@ -6,6 +6,7 @@
 #include "Components/MeshComponent.h"
 #include "EnemyDinosaur.h"
 #include "Kismet/Gameplaystatics.h"
+#include "BombRangeOne.h"
 
 // Sets default values
 ABombRange::ABombRange()
@@ -18,7 +19,6 @@ ABombRange::ABombRange()
 
 	meshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Static Mesh"));
 	meshComp->SetupAttachment(RootComponent);
-
 }
 
 // Called when the game starts or when spawned
@@ -33,14 +33,21 @@ void ABombRange::BeginPlay()
 	FRotator effectRot = GetActorRotation();
 
 	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), explosion_effect, effectLoc, effectRot, true);
+
+	FVector spawnPosition = GetActorLocation() + GetActorRightVector() * (-70.0f);
+	FRotator spawnRotation = FRotator(0, 0, 0);
+	FActorSpawnParameters param;
+	param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+
+	GetWorld()->SpawnActor<ABombRangeOne>(bombRangeone, spawnPosition, spawnRotation, param);
+
+	//GetWorld()->GetTimerManager().SetTimer(exploTimer, this, &ABombRangeOne::esplosionTimer, 0.3f, false);
 }
 
 // Called every frame
 void ABombRange::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	//GetWorld()->SpawnActor<ABombRange2>(bombRange2, GetActorTransform());
 
 }
 
@@ -51,12 +58,5 @@ void ABombRange::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Oth
 	if (enemy != nullptr)
 	{		
 		enemy->Destroy();
-
-		Destroy();
 	}
 }
-
-//FVector effectLoc = GetActorLocation();
-//FRotator effectRot = GetActorRotation();
-
-//UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), explosion_effect, effectLoc, effectRot, true);

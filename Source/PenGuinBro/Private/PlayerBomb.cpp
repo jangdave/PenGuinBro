@@ -37,12 +37,12 @@ void APlayerBomb::Tick(float DeltaTime)
 
 	if (currentTime > explosionTime)
 	{
+		GetWorld()->SpawnActor<ABombRange>(bombRange, GetActorTransform());
+		
 		Destroy();
 
 		//누적된 시간을 다시 0으로 초기화
 		currentTime = 0;
-
-		GetWorld()->SpawnActor<ABombRange>(bombRange, GetActorTransform());
 	}
 	
 }

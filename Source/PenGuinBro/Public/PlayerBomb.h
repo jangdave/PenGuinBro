@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "BombRange.h"
 #include "PlayerBomb.generated.h"
 
 UCLASS()
