@@ -61,8 +61,8 @@ void APlayerPenguin::Down()
 
 void APlayerPenguin::BombDrop()
 {
-	FVector spawnPosition = GetActorLocation() + GetActorForwardVector() * 40.0f;
-	FRotator spawnRotation = FRotator(10.0f, 0, 0);
+	FVector spawnPosition = GetActorLocation() + GetActorForwardVector() * 50.0f;
+	FRotator spawnRotation = FRotator(20.0f, 0, 0);
 	FActorSpawnParameters param;
 	param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 

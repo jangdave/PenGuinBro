@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Components/BoxComponent.h"
 #include "PlayerBomb.generated.h"
 
 UCLASS()
@@ -28,15 +27,13 @@ public:
 	class UBoxComponent* boxComp;
 	
 	UPROPERTY(Editanywhere, BlueprintReadWrite, Category = BombSettings)
-	class UBoxComponent* boxComp1;
-
-	UPROPERTY(Editanywhere, BlueprintReadWrite, Category = BombSettings)
 	class UStaticMeshComponent* meshComp;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = BombSettings)
+	TSubclassOf<class ABombRange> bombRange;
 
 	UPROPERTY(EditInstanceOnly, Category = BombSetting)
 	float explosionTime = 1;
-
-	
 
 private:
 	FVector direction;
