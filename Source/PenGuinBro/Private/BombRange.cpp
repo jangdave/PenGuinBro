@@ -7,6 +7,7 @@
 #include "EnemyDinosaur.h"
 #include "Kismet/Gameplaystatics.h"
 #include "BombRangeOne.h"
+#include "PlayerPenGuin.h"
 
 // Sets default values
 ABombRange::ABombRange()
@@ -41,7 +42,7 @@ void ABombRange::BeginPlay()
 
 	GetWorld()->SpawnActor<ABombRangeOne>(bombRangeone, spawnPosition, spawnRotation, param);
 
-	//GetWorld()->GetTimerManager().SetTimer(exploTimer, this, &ABombRangeOne::esplosionTimer, 0.3f, false);
+	GetWorld()->GetTimerManager().SetTimer(disTimer, this, &ABombRange::DestroyMyself, 1.0f, false);
 }
 
 // Called every frame
@@ -54,9 +55,18 @@ void ABombRange::Tick(float DeltaTime)
 void ABombRange::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	AEnemyDinosaur* enemy = Cast<AEnemyDinosaur>(OtherActor);
-
+	APlayerPenguin* enemy1 = Cast<APlayerPenguin>(OtherActor);
 	if (enemy != nullptr)
 	{		
 		enemy->Destroy();
 	}
+	else if (enemy1 != nullptr)
+	{
+		enemy1->Destroy();
+	}
+}
+
+void ABombRange::DestroyMyself()
+{
+	Destroy();
 }

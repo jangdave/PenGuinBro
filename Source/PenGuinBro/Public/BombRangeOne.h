@@ -47,7 +47,7 @@ public:
 private:
 	float currentTime = 0;
 
-	float explosionTime = 0.5f;
+	float explosionTime = 1.0f;
 
 	FTimerHandle exploTimer;
 

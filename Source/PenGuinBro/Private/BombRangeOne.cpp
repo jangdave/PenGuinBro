@@ -6,6 +6,7 @@
 #include "Components/MeshComponent.h"
 #include "Kismet/Gameplaystatics.h"
 #include "EnemyDinosaur.h"
+#include "PlayerPenGuin.h"
 
 // Sets default values
 ABombRangeOne::ABombRangeOne()
@@ -30,8 +31,10 @@ void ABombRangeOne::BeginPlay()
 
 	sphereComp->OnComponentBeginOverlap.AddDynamic(this, &ABombRangeOne::OnOverlap);
 	sphereComp->SetGenerateOverlapEvents(true);
+	sphereComp1->OnComponentBeginOverlap.AddDynamic(this, &ABombRangeOne::OnOverlap);
+	sphereComp1->SetGenerateOverlapEvents(true);
 
-	GetWorld()->GetTimerManager().SetTimer(exploTimer, this, &ABombRangeOne::esplosionTimer, 0.3f, false);
+	GetWorld()->GetTimerManager().SetTimer(exploTimer, this, &ABombRangeOne::esplosionTimer, 0.2f, false);
 }
 
 // Called every frame
@@ -54,21 +57,26 @@ void ABombRangeOne::Tick(float DeltaTime)
 void ABombRangeOne::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	AEnemyDinosaur* enemy = Cast<AEnemyDinosaur>(OtherActor);
+	APlayerPenguin* enemy1 = Cast<APlayerPenguin>(OtherActor);
 
 	if (enemy != nullptr)
 	{
 		enemy->Destroy();
 	}
+	else if (enemy1 != nullptr)
+	{
+		enemy1->Destroy();
+	}
 }
 
 void ABombRangeOne::esplosionTimer()
 {
-	FVector effectLoc = GetActorLocation() + GetActorUpVector() * 30.0f;
+	FVector effectLoc = GetActorLocation() + GetActorUpVector() * 10.0f;
 	FRotator effectRot = GetActorRotation();
 
 	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), explosion_effect, effectLoc, effectRot, true);
 
-	FVector effectLoc1 = GetActorLocation() + GetActorRightVector() * 140.0f + GetActorUpVector() * 30.0f;
+	FVector effectLoc1 = GetActorLocation() + GetActorRightVector() * 140.0f + GetActorUpVector() * 10.0f;
 	FRotator effectRot1 = FRotator(0, 0, 0);
 
 	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), explosion_effect1, effectLoc1, effectRot1, true);
