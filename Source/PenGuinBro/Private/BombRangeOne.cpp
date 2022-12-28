@@ -7,6 +7,7 @@
 #include "Kismet/Gameplaystatics.h"
 #include "EnemyDinosaur.h"
 #include "PlayerPenGuin.h"
+#include "Tong.h"
 
 // Sets default values
 ABombRangeOne::ABombRangeOne()
@@ -58,6 +59,7 @@ void ABombRangeOne::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* 
 {
 	AEnemyDinosaur* enemy = Cast<AEnemyDinosaur>(OtherActor);
 	APlayerPenguin* enemy1 = Cast<APlayerPenguin>(OtherActor);
+	ATong* tong = Cast<ATong>(OtherActor);
 
 	if (enemy != nullptr)
 	{
@@ -66,6 +68,10 @@ void ABombRangeOne::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* 
 	else if (enemy1 != nullptr)
 	{
 		enemy1->Destroy();
+	}
+	else if (tong != nullptr)
+	{
+		tong->Destroy();
 	}
 }
 
