@@ -41,6 +41,23 @@ void APlayerPenguin::Tick(float DeltaTime)
 	SetActorLocation(dir);
 
 	rotTime += DeltaTime;
+	
+	if (isTouched){
+	//플레이어를 X축으로 180도 회전시키고
+		SetActorRotation(FRotator(180,0,0));
+
+		//회전발판에 Attach 시킨다.
+		//AttachToActor(rotFloor, FAttachmentTransformRules::SnapToTargetIncludingScale);
+
+		UE_LOG(LogTemp, Warning, TEXT("Overlap"));
+
+		rotFloor->SetActorTickEnabled(true);
+		if (rotTime >= 1.0f)
+		{
+			rotFloor->SetActorTickEnabled(false);
+			rotTime = 0;
+		};
+	}
 
 	UE_LOG(LogTemp, Warning, TEXT("%f"), rotTime);
 }
@@ -53,28 +70,10 @@ void APlayerPenguin::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 void APlayerPenguin::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	ARotFloor* rotFloor = Cast<ARotFloor>(OtherActor);
+	rotFloor = Cast<ARotFloor>(OtherActor);
 	if (rotFloor != nullptr)
 	{
-		//플레이어를 X축으로 180도 회전시키고
-		SetActorRotation(FRotator(180,0,0));
-
-		//회전발판에 Attach 시킨다.
-		//AttachToActor(rotFloor, FAttachmentTransformRules::SnapToTargetIncludingScale);
-
-		UE_LOG(LogTemp, Warning, TEXT("Overlap"));
-
-		
-		rotFloor->SetActorTickEnabled(true);
-		if (rotTime >= 1.0f)
-		{
-			rotFloor->SetActorTickEnabled(false);
-			rotTime = 0;
-		};
-		
-
-		
-		
+		isTouched = true;
 	}
 	
 }
