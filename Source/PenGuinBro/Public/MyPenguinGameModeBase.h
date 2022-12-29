@@ -15,6 +15,8 @@ class PENGUINBRO_API AMyPenguinGameModeBase : public AGameModeBase
 	GENERATED_BODY()
 
 public:
+	AMyPenguinGameModeBase();
+
 	virtual void BeginPlay() override;
 	
 	virtual void Tick(float DeltaTime) override; 
@@ -24,14 +26,19 @@ public:
 
 	UFUNCTION(BlueprintPure)
 	FORCEINLINE int32 GetGameTimer(){ return gameTimer; }
+	
+	UFUNCTION(BlueprintPure)
+	FORCEINLINE int32 GetLifeTime(){ return lifeTime; }
 
-	void GameTimer(int32 time);
+	void GameTimer(float time);
+
+	void LifeTime();
 
 
 private:
-	int32 gameTimer = 90;
+	int32 lifeTime = 2;
 	
-	class UMainWidget* main_UI;
+	float gameTimer = 91;
 
-	int32 currentTime = 0;
+	class UMainWidget* main_UI;
 };

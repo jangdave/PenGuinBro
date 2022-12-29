@@ -6,7 +6,7 @@
 #include "MyPenguinGameModeBase.h"
 #include "Components/TextBlock.h"
 
-void UMainWidget::PrintGameTimer()
+void UMainWidget::PrintMainGame()
 {
 	AMyPenguinGameModeBase* myGM = Cast<AMyPenguinGameModeBase>(UGameplayStatics::GetGameMode(this));
 	
@@ -14,5 +14,8 @@ void UMainWidget::PrintGameTimer()
 	{
 		FText timer = FText::AsNumber(myGM->GetGameTimer());
 		gamTimer->SetText(timer);
+
+		FText life = FText::AsNumber(myGM->GetLifeTime());
+		lifeTime->SetText(life);
 	}
 }

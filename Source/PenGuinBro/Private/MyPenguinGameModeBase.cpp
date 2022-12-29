@@ -6,35 +6,48 @@
 #include "Kismet/GameplayStatics.h"
 #include "MyPenguinGameModeBase.h"
 
+AMyPenguinGameModeBase::AMyPenguinGameModeBase()
+{
+	PrimaryActorTick.bCanEverTick = true;
+}
+
 void AMyPenguinGameModeBase::BeginPlay()
 {
+	Super::BeginPlay();
+
 	main_UI = CreateWidget<UMainWidget>(GetWorld(), mainwidget);
 	
 	if (main_UI != nullptr)
 	{
 		main_UI->AddToViewport();
 
-		main_UI->PrintGameTimer();
+		main_UI->PrintMainGame();
 	}
 }
 
 void AMyPenguinGameModeBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	currentTime += DeltaTime;
-
-	//AMyPenguinGameModeBase::GameTimer;
-	//GameTimer(1);
+	
+	GameTimer(DeltaTime);
 }
 
-void AMyPenguinGameModeBase::GameTimer(int32 time)
+void AMyPenguinGameModeBase::GameTimer(float time)
 {
 	gameTimer -= time;
 	
-	if(main_UI != nullptr)
+	if (gameTimer <= 0)
 	{
-		main_UI->PrintGameTimer();
+		gameTimer = 0.00f;
 	}
+	if (main_UI != nullptr)
+	{
+		main_UI->PrintMainGame();
+	}
+}
+
+void AMyPenguinGameModeBase::LifeTime()
+{
+
 }
 

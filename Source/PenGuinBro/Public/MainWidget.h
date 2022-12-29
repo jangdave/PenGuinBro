@@ -18,7 +18,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="MySetting|Timer", meta=(BindWidget))
 	class UTextBlock* gamTimer;
 
-	void PrintGameTimer();
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="MySetting|Life", meta=(BindWidget))
+	class UTextBlock* lifeTime;
+
+	void PrintMainGame();
 
 	
 };
