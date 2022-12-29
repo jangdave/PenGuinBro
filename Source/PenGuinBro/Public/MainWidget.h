@@ -13,5 +13,12 @@ UCLASS()
 class PENGUINBRO_API UMainWidget : public UUserWidget
 {
 	GENERATED_BODY()
+
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="MySetting|Timer", meta=(BindWidget))
+	class UTextBlock* gamTimer;
+
+	void PrintGameTimer();
+
 	
 };
