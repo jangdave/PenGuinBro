@@ -8,7 +8,7 @@
 #include "PlayerBomb.h"
 #include "Components/BoxComponent.h"
 #include "RotFloor.h"
-
+#include "GameFramework/Actor.h"
 
 // Sets default values
 APlayerPenguin::APlayerPenguin()
@@ -40,6 +40,9 @@ void APlayerPenguin::Tick(float DeltaTime)
 	FVector dir = GetActorLocation() + direction * moveSpeed * DeltaTime;
 	SetActorLocation(dir);
 
+	rotTime += DeltaTime;
+
+	UE_LOG(LogTemp, Warning, TEXT("%f"), rotTime);
 }
 
 // Called to bind functionality to input
@@ -54,15 +57,26 @@ void APlayerPenguin::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor*
 	if (rotFloor != nullptr)
 	{
 		//플레이어를 X축으로 180도 회전시키고
-		//SetActorRotation(FRotator(180,0,0));
+		SetActorRotation(FRotator(180,0,0));
 
 		//회전발판에 Attach 시킨다.
 		//AttachToActor(rotFloor, FAttachmentTransformRules::SnapToTargetIncludingScale);
 
 		UE_LOG(LogTemp, Warning, TEXT("Overlap"));
 
-	}
+		
+		rotFloor->SetActorTickEnabled(true);
+		if (rotTime >= 1.0f)
+		{
+			rotFloor->SetActorTickEnabled(false);
+			rotTime = 0;
+		};
+		
 
+		
+		
+	}
+	
 }
 
 void APlayerPenguin::Horizental(float value)

@@ -29,4 +29,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "RotFloor Settings")
 	class UStaticMeshComponent* meshCompR;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "RotFloor Settings")
+	FVector direction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "RotFloor Settings")
+	float rotSpeed;
 };

@@ -68,4 +68,6 @@ private:
 	UFUNCTION(BlueprintCallable)
 	void BombDrop();
 
+	float rotTime = 0;
+	float rotCool = 1.0f;
 };
