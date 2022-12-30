@@ -40,22 +40,28 @@ void APlayerPenguin::Tick(float DeltaTime)
 	FVector dir = GetActorLocation() + direction * moveSpeed * DeltaTime;
 	SetActorLocation(dir);
 
-	rotTime += DeltaTime;
 	
+	
+	//정수리 박스가 회전발판에 오버랩되면 -> isTouched가 트루면
 	if (isTouched){
 	//플레이어를 X축으로 180도 회전시키고
-		SetActorRotation(FRotator(180,0,0));
+		//SetActorRotation(FRotator(180,0,0));
 
 		//회전발판에 Attach 시킨다.
 		//AttachToActor(rotFloor, FAttachmentTransformRules::SnapToTargetIncludingScale);
 
-		UE_LOG(LogTemp, Warning, TEXT("Overlap"));
-
+		//회전발판의 틱을 활성화 시킨다.
 		rotFloor->SetActorTickEnabled(true);
+
+		rotTime += DeltaTime;
+		//로테이션 타임이 1초보다 크거나 같아지면
 		if (rotTime >= 1.0f)
 		{
+		//회전발판의 틱을 비활성화 시키고
 			rotFloor->SetActorTickEnabled(false);
+		//로테이션 타임을 0으로 초기화시킨다.
 			rotTime = 0;
+			isTouched = false;
 		};
 	}
 
@@ -70,10 +76,15 @@ void APlayerPenguin::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 void APlayerPenguin::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+	//오버랩 이벤트의 아더액터를 회전발판에 캐스팅 할 수 있으면
 	rotFloor = Cast<ARotFloor>(OtherActor);
+
+	
 	if (rotFloor != nullptr)
 	{
+	//isTouched를 트루로 처리
 		isTouched = true;
+		UE_LOG(LogTemp, Warning, TEXT("Overlap"));
 	}
 	
 }
