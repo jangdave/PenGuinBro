@@ -49,6 +49,14 @@ public:
 
 	FVector direction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = PlayerSettings)
+	class UBoxComponent* boxComp;
+
+	class ARotFloor* rotFloor;
+
+	UFUNCTION()
+	void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
 private:
 	UFUNCTION(BlueprintCallable)
 	void Horizental(float val);
@@ -62,4 +70,7 @@ private:
 	UFUNCTION(BlueprintCallable)
 	void BombDrop();
 
+	float rotTime = 0;
+	float rotCool = 1.0f;
+	bool isTouched;
 };
