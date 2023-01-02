@@ -23,5 +23,4 @@ public:
 
 	void PrintMainGame();
 
-	
 };

@@ -32,7 +32,7 @@ public:
 
 	void GameTimer(float time);
 
-	void LifeTime();
+	void LifeTime(int32 count);
 
 
 private:

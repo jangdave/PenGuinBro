@@ -46,8 +46,14 @@ void AMyPenguinGameModeBase::GameTimer(float time)
 	}
 }
 
-void AMyPenguinGameModeBase::LifeTime()
+void AMyPenguinGameModeBase::LifeTime(int32 count)
 {
+	//캐릭터 불러와서 사라지면 라이프 타임이 1씩 줄어듬
+	lifeTime -= 1;
 
+	if (main_UI != nullptr)
+	{
+		main_UI->PrintMainGame();
+	}
 }
 
