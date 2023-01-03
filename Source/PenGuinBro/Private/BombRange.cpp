@@ -9,6 +9,7 @@
 #include "BombRangeOne.h"
 #include "PlayerPenGuin.h"
 #include "Tong.h"
+#include "MyPenguinGameModeBase.h"
 
 // Sets default values
 ABombRange::ABombRange()
@@ -65,6 +66,10 @@ void ABombRange::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Oth
 	else if (enemy1 != nullptr)
 	{
 		enemy1->Destroy();
+
+		AGameModeBase* gm = UGameplayStatics::GetGameMode(this);
+		AMyPenguinGameModeBase* myGM = Cast<AMyPenguinGameModeBase>(gm);
+		myGM->LifeTime(1);
 	}
 	else if (tong != nullptr)
 	{

@@ -9,6 +9,9 @@
 #include "Components/BoxComponent.h"
 #include "RotFloor.h"
 #include "GameFramework/Actor.h"
+#include "Kismet/GameplayStatics.h"
+#include "MyPenguinGameModeBase.h"
+
 
 // Sets default values
 APlayerPenguin::APlayerPenguin()
@@ -40,8 +43,6 @@ void APlayerPenguin::Tick(float DeltaTime)
 	FVector dir = GetActorLocation() + direction * moveSpeed * DeltaTime;
 	SetActorLocation(dir);
 
-	
-	
 	//정수리 박스가 회전발판에 오버랩되면 -> isTouched가 트루면
 	if (isTouched){
 	//플레이어를 X축으로 180도 회전시키고
@@ -62,10 +63,9 @@ void APlayerPenguin::Tick(float DeltaTime)
 		//로테이션 타임을 0으로 초기화시킨다.
 			rotTime = 0;
 			isTouched = false;
-		};
+		}
 	}
 
-	UE_LOG(LogTemp, Warning, TEXT("%f"), rotTime);
 }
 
 // Called to bind functionality to input
@@ -109,15 +109,12 @@ void APlayerPenguin::Down()
 
 void APlayerPenguin::BombDrop()
 {
-	FVector spawnPosition = GetActorLocation() + GetActorForwardVector() * 50.0f;
+	FVector spawnPosition = GetActorLocation() + GetActorForwardVector() * 50.0f; 
 	FRotator spawnRotation = FRotator(20.0f, 0, 0);
 	FActorSpawnParameters param;
 	param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 
 	GetWorld()->SpawnActor<APlayerBomb>(bombFactory, spawnPosition, spawnRotation, param);
 }
-
-
-
 
 //AdddMovementInput 벽에 비벼지지 않게 하는 기능

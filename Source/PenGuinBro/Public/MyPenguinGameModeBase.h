@@ -41,4 +41,6 @@ private:
 	float gameTimer = 91;
 
 	class UMainWidget* main_UI;
+
+	class AActor* target;
 };

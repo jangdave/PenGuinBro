@@ -4,7 +4,8 @@
 #include "MyPenguinGameModeBase.h"
 #include "MainWidget.h"
 #include "Kismet/GameplayStatics.h"
-#include "MyPenguinGameModeBase.h"
+#include "PlayerPenGuin.h"
+#include "EngineUtils.h"
 
 AMyPenguinGameModeBase::AMyPenguinGameModeBase()
 {
@@ -47,10 +48,17 @@ void AMyPenguinGameModeBase::GameTimer(float time)
 }
 
 void AMyPenguinGameModeBase::LifeTime(int32 count)
-{
-	//캐릭터 불러와서 사라지면 라이프 타임이 1씩 줄어듬
-	lifeTime -= 1;
+{	
+	if(lifeTime >= 0)
+	{
+		lifeTime -= count;
 
+		//플레이어 부활
+	}
+	else
+	{
+		//게임오버
+	}
 	if (main_UI != nullptr)
 	{
 		main_UI->PrintMainGame();
