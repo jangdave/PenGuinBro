@@ -21,6 +21,9 @@ APlayerPenguin::APlayerPenguin()
 	boxComp->SetupAttachment(RootComponent);
 	boxComp->SetBoxExtent(FVector(5.0f));
 
+	//컨트롤러 로테이션 상속
+	//bUseControllerRotationYaw(true);
+
 }
 
 // Called when the game starts or when spawned
@@ -29,6 +32,8 @@ void APlayerPenguin::BeginPlay()
 	Super::BeginPlay();
 	
 	boxComp->OnComponentBeginOverlap.AddDynamic(this, &APlayerPenguin::OnOverlap);
+
+	GetWorld()->GetFirstPlayerController()->Possess(this);
 }
 
 // Called every frame
@@ -124,7 +129,6 @@ void APlayerPenguin::ResetGravity()
 {
 	GetCharacterMovement()->GravityScale = 1;
 }
-
 
 void APlayerPenguin::BombDrop()
 {

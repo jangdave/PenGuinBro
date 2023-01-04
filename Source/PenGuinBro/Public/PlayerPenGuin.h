@@ -32,11 +32,11 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = PlayerSettings)
 	float moveSpeed = 200;
-
-	FVector direction;
-
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = PlayerSettings)
 	class UBoxComponent* boxComp;
+	
+	FVector direction;
 
 	class ARotFloor* rotFloor;
 
@@ -50,8 +50,6 @@ public:
 	void ResetGravity();
 
 private:
-
-
 	UFUNCTION(BlueprintCallable)
 	void BombDrop();
 
