@@ -23,4 +23,26 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UPROPERTY(EditAnywhere, Category = CannonSettings)
+	class UBoxComponent* boxComp;
+
+	UPROPERTY(EditAnywhere, Category = CannonSettings)
+	class UStaticMeshComponent* meshComp;
+
+	UPROPERTY(EditAnywhere, Category = CannonSettings)
+	class UArrowComponent* shootArrow;
+
+	UPROPERTY(EditAnywhere, Category = CannonSettings)
+	TSubclassOf<class APlayerBomb> bombFactory;
+
+	UPROPERTY(EditAnywhere, Category = CannonSettings)
+	float ImpulseForce;
+
+	bool isShootReady = false;
+
+	APlayerBomb* bomb;
+
+	UFUNCTION()
+	void CannonShoot(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
 };

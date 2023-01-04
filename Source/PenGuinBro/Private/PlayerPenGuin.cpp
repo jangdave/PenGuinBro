@@ -44,28 +44,33 @@ void APlayerPenguin::Tick(float DeltaTime)
 	
 	//정수리 박스가 회전발판에 오버랩되면 -> isTouched가 트루면
 	if (isTouched){
-	//플레이어를 X축으로 180도 회전시키고
-		//SetActorRotation(FRotator(180,0,0));
-
-		//회전발판에 Attach 시킨다.
-		//AttachToActor(rotFloor, FAttachmentTransformRules::SnapToTargetIncludingScale);
-
 		//회전발판의 틱을 활성화 시킨다.
 		rotFloor->SetActorTickEnabled(true);
 
 		rotTime += DeltaTime;
 		//로테이션 타임이 1초보다 크거나 같아지면
-		if (rotTime >= 1.0f)
-		{
+		//if (rotTime >= 1.0f)
+		//{
 		//회전발판의 틱을 비활성화 시키고
-			rotFloor->SetActorTickEnabled(false);
+		//	rotFloor->SetActorTickEnabled(false);
 		//로테이션 타임을 0으로 초기화시킨다.
+		//	rotTime = 0;
+		//	isTouched = false;
+		//};
+
+		//회전 시간이 1초에 가까워지면
+		if (rotTime >= 0.95f)
+		{
+			//회전발판의 틱을 비활성화 시키고
+			rotFloor->SetActorTickEnabled(false);
+			rotFloor->SetActorRotation(FRotator(0,0,180));
+			//로테이션 타임을 0으로 초기화시킨다.
 			rotTime = 0;
 			isTouched = false;
 		};
 	}
 
-	UE_LOG(LogTemp, Warning, TEXT("%f"), rotTime);
+	//UE_LOG(LogTemp, Warning, TEXT("%f"), rotTime);
 }
 
 // Called to bind functionality to input
@@ -82,11 +87,31 @@ void APlayerPenguin::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor*
 	
 	if (rotFloor != nullptr)
 	{
-	//isTouched를 트루로 처리
+		//플레이어를 X축으로 180도 회전시키고
+		SetActorRotation(FRotator(180, 0, 0));
+
+		//회전발판에 Attach 시킨다.
+		AttachToActor(rotFloor, FAttachmentTransformRules::KeepWorldTransform);
+
+		FTimerHandle snapTimer;
+		GetWorld()->GetTimerManager().SetTimer(snapTimer, this, &APlayerPenguin::ResetAttach, 2, false);
+
+		//isTouched를 트루로 처리
 		isTouched = true;
-		UE_LOG(LogTemp, Warning, TEXT("Overlap"));
+		//UE_LOG(LogTemp, Warning, TEXT("Overlap"));
 	}
 	
+}
+
+void APlayerPenguin::ResetAttach()
+{
+	//붙여놨던 부모를 해제한다.
+	DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+
+	if (GetActorRotation() == FRotator(180, 0, 0))
+	{
+		AddActorWorldRotation(FRotator(-180,0,0));
+	}
 }
 
 void APlayerPenguin::Horizental(float value)
