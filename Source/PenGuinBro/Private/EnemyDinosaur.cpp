@@ -38,7 +38,6 @@ void AEnemyDinosaur::Tick(float DeltaTime)
 
 	direction = GetActorForwardVector();
 
-
 	SetActorLocation(GetActorLocation() + direction * moveSpeed * DeltaTime);
 
 
@@ -53,6 +52,11 @@ void AEnemyDinosaur::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 void AEnemyDinosaur::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-
+// 	ATong* tong = Cast<ATong>(OtherActor);
+// 
+// 	if (tong != nullptr)
+// 	{
+// 		
+// 	}
 }
 
