@@ -51,7 +51,7 @@ public:
 private:
 	int32 lifeTime = 2;
 
-	float gameTimer = 91;
+	float gameTimer = 11;
 	
 	float overTime = 21;
 
