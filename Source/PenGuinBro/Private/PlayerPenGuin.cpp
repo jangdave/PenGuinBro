@@ -125,23 +125,6 @@ void APlayerPenguin::ResetGravity()
 	GetCharacterMovement()->GravityScale = 1;
 }
 
-void APlayerPenguin::Horizental(float value)
-{
-	H = value;
-	UE_LOG(LogTemp, Warning, TEXT("H : %.4f"), H);
-	direction.Y = H;
-
-}
-
-void APlayerPenguin::Up()
-{
-
-}
-
-void APlayerPenguin::Down()
-{
-
-}
 
 void APlayerPenguin::BombDrop()
 {
