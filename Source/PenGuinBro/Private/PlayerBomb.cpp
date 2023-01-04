@@ -15,9 +15,11 @@ APlayerBomb::APlayerBomb()
 
 	boxComp = CreateDefaultSubobject<UBoxComponent>(TEXT("Box Collision"));
 	SetRootComponent(boxComp);
+	boxComp->SetCollisionProfileName(TEXT("BombPreset"));
 	
 	meshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Static Mesh"));
 	meshComp->SetupAttachment(RootComponent);
+	meshComp->SetCollisionProfileName(TEXT("BombMeshPreset"));
 }
 
 // Called when the game starts or when spawned

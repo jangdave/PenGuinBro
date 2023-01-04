@@ -57,6 +57,12 @@ public:
 	UFUNCTION()
 	void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
+	UFUNCTION()
+	void ResetAttach();
+
+	UFUNCTION()
+	void ResetGravity();
+
 private:
 	UFUNCTION(BlueprintCallable)
 	void Horizental(float val);
@@ -69,6 +75,7 @@ private:
 
 	UFUNCTION(BlueprintCallable)
 	void BombDrop();
+
 
 	float rotTime = 0;
 	float rotCool = 1.0f;
