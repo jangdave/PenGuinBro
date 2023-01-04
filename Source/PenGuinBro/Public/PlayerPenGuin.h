@@ -60,6 +60,9 @@ public:
 	UFUNCTION()
 	void ResetAttach();
 
+	UFUNCTION()
+	void ResetGravity();
+
 private:
 	UFUNCTION(BlueprintCallable)
 	void Horizental(float val);

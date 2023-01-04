@@ -9,6 +9,7 @@
 #include "Components/BoxComponent.h"
 #include "RotFloor.h"
 #include "GameFramework/Actor.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values
 APlayerPenguin::APlayerPenguin()
@@ -90,8 +91,13 @@ void APlayerPenguin::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor*
 		//플레이어를 X축으로 180도 회전시키고
 		SetActorRotation(FRotator(180, 0, 0));
 
+		GetCharacterMovement()->GravityScale = 0;
+
 		//회전발판에 Attach 시킨다.
 		AttachToActor(rotFloor, FAttachmentTransformRules::KeepWorldTransform);
+
+		FTimerHandle gravityTimer;
+		GetWorld()->GetTimerManager().SetTimer(gravityTimer, this, &APlayerPenguin::ResetGravity, 1, false);
 
 		FTimerHandle snapTimer;
 		GetWorld()->GetTimerManager().SetTimer(snapTimer, this, &APlayerPenguin::ResetAttach, 2, false);
@@ -112,6 +118,11 @@ void APlayerPenguin::ResetAttach()
 	{
 		AddActorWorldRotation(FRotator(-180,0,0));
 	}
+}
+
+void APlayerPenguin::ResetGravity()
+{
+	GetCharacterMovement()->GravityScale = 1;
 }
 
 void APlayerPenguin::Horizental(float value)
