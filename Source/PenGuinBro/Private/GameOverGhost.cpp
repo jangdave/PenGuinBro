@@ -79,7 +79,7 @@ void AGameOverGhost::GhostOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 		myGM->LifeTime(1);
 
 		myGM->GameTimer(-1.0f);
-		
+
 		Destroy();
 	}
 }

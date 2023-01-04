@@ -94,8 +94,6 @@ void AMyPenguinGameModeBase::LifeTime(int32 count)
 
 			over_UI->PrintOverGame();
 		}
-
-		//특정키 누르면 레벨 리셋
 	}
 	if (main_UI != nullptr)
 	{
