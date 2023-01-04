@@ -32,6 +32,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = BombSettings)
 	TSubclassOf<class ABombRange> bombRange;
 
+	UPROPERTY(EditDefaultsOnly, Category = BombSettings)
+	class USoundBase* fireSound;
+
 	UPROPERTY(EditInstanceOnly, Category = BombSetting)
 	float explosionTime = 1;
 

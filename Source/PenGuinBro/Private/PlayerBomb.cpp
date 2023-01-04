@@ -6,6 +6,7 @@
 #include "Components/MeshComponent.h"
 #include "BombRange.h"
 #include "EnemyDinosaur.h"
+#include "Kismet/Gameplaystatics.h"
 
 // Sets default values
 APlayerBomb::APlayerBomb()
@@ -42,6 +43,8 @@ void APlayerBomb::Tick(float DeltaTime)
 		GetWorld()->SpawnActor<ABombRange>(bombRange, GetActorTransform());
 		
 		Destroy();
+
+		UGameplayStatics::PlaySound2D(this, fireSound);
 
 		//누적된 시간을 다시 0으로 초기화
 		currentTime = 0;

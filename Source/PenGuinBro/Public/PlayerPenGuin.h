@@ -33,24 +33,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = PlayerSettings)
 	float moveSpeed = 200;
 	
-	UPROPERTY(EditDefaultsOnly, Category=PlayerSettings)
-	class UInputAction* ia_Horizental;
-
-	UPROPERTY(EditDefaultsOnly, Category=PlayerSettings)
-	class UInputAction* ia_Up;
-
-	UPROPERTY(EditDefaultsOnly, Category = PlayerSettings)
-	class UInputAction* ia_Down;
-
-	UPROPERTY(EditDefaultsOnly, Category = PlayerSettings)
-	class UInputAction* ia_BombDrop;
-
-	float H;
-
-	FVector direction;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = PlayerSettings)
 	class UBoxComponent* boxComp;
+	
+	FVector direction;
 
 	class ARotFloor* rotFloor;
 
@@ -64,15 +50,6 @@ public:
 	void ResetGravity();
 
 private:
-	UFUNCTION(BlueprintCallable)
-	void Horizental(float val);
-
-	UFUNCTION(BlueprintCallable)
-	void Up();
-
-	UFUNCTION(BlueprintCallable)
-	void Down();
-
 	UFUNCTION(BlueprintCallable)
 	void BombDrop();
 
