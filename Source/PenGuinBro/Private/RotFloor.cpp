@@ -34,7 +34,6 @@ void ARotFloor::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 
-	direction = FVector(1,0,0);
 	rotSpeed = 180;
 
 	SetActorRotation(GetActorRotation() + FRotator(0, 0, rotSpeed * DeltaTime));
