@@ -44,7 +44,7 @@ void ABombRange::BeginPlay()
 
 	GetWorld()->SpawnActor<ABombRangeOne>(bombRangeone, spawnPosition, spawnRotation, param);
 
-	GetWorld()->GetTimerManager().SetTimer(disTimer, this, &ABombRange::DestroyMyself, 1.0f, false);
+	GetWorld()->GetTimerManager().SetTimer(disTimer, this, &ABombRange::DestroyMyself, 0.4f, false);
 }
 
 // Called every frame
@@ -75,6 +75,7 @@ void ABombRange::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Oth
 	{
 		tong->Destroy();
 	}
+	UGameplayStatics::PlaySound2D(this, fireSound);
 }
 
 void ABombRange::DestroyMyself()

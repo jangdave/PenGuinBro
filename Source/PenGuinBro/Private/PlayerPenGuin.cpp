@@ -84,7 +84,7 @@ void APlayerPenguin::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor*
 	{
 	//isTouched를 트루로 처리
 		isTouched = true;
-		UE_LOG(LogTemp, Warning, TEXT("Overlap"));
+		//UE_LOG(LogTemp, Warning, TEXT("Overlap"));
 	}
 	
 }
@@ -92,7 +92,7 @@ void APlayerPenguin::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor*
 void APlayerPenguin::Horizental(float value)
 {
 	H = value;
-	UE_LOG(LogTemp, Warning, TEXT("H : %.4f"), H);
+	//UE_LOG(LogTemp, Warning, TEXT("H : %.4f"), H);
 	direction.Y = H;
 
 }
@@ -109,7 +109,7 @@ void APlayerPenguin::Down()
 
 void APlayerPenguin::BombDrop()
 {
-	FVector spawnPosition = GetActorLocation() + GetActorForwardVector() * 50.0f; 
+	FVector spawnPosition = GetActorLocation() + GetActorForwardVector() * 50.0f;
 	FRotator spawnRotation = FRotator(20.0f, 0, 0);
 	FActorSpawnParameters param;
 	param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
