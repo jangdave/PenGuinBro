@@ -77,6 +77,10 @@ void AGameOverGhost::GhostOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 		AGameModeBase* gm = UGameplayStatics::GetGameMode(this);
 		AMyPenguinGameModeBase* myGM = Cast<AMyPenguinGameModeBase>(gm);
 		myGM->LifeTime(1);
+
+		myGM->GameTimer(-1.0f);
+		
+		Destroy();
 	}
 }
 

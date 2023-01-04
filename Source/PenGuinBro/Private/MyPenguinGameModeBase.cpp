@@ -75,10 +75,11 @@ void AMyPenguinGameModeBase::LifeTime(int32 count)
 	{
 		lifeTime -= count;
 
+		gameTimer += 20.0f;
+
 		FActorSpawnParameters SpawnParams;
 		//캐릭터 스폰
-		GetWorld()->SpawnActor<APlayerPenguin>(player, FVector(808.0f, -370.0f, -184.0f), FRotator(0, 0, 0), SpawnParams);
-		GetWorld()->SpawnPlayActor<APlayerPenguin>(player, )
+		GetWorld()->SpawnActor<APlayerPenguin>(player, FVector(808.0f, -370.0f, -184.0f), FRotator(0, 90.0f, 0), SpawnParams);
 	}
 	else
 	{
@@ -105,7 +106,7 @@ void AMyPenguinGameModeBase::LifeTime(int32 count)
 void AMyPenguinGameModeBase::OverTime(float otime)
 {
 	//시간 조절하기
-	UE_LOG(LogTemp,Warning,TEXT("%f"), otime);
+	//UE_LOG(LogTemp,Warning,TEXT("%f"), otime);
 
 	overTime -= otime;
 

@@ -53,7 +53,7 @@ private:
 
 	float gameTimer = 91;
 	
-	float overTime = 20;
+	float overTime = 21;
 
 	class UMainWidget* main_UI;
 	
