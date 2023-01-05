@@ -40,7 +40,11 @@ void AFinishCoin::FinishTouch(UPrimitiveComponent* OverlappedComponent, AActor* 
 
 	if (endline != nullptr)
 	{
+		//부착시킨다
 		
+		//end위젯 불러오기
+
+		//게임시간 스탑
 	}
 	
 }

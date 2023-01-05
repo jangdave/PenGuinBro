@@ -8,6 +8,7 @@
 #include "EngineUtils.h"
 #include "OverWidget.h"
 #include "GameOverGhost.h"
+#include "EnemyDinosaur.h"
 
 AMyPenguinGameModeBase::AMyPenguinGameModeBase()
 {
@@ -47,6 +48,27 @@ void AMyPenguinGameModeBase::Tick(float DeltaTime)
 	if (start != false)
 	{
 		OverTime(DeltaTime);
+	}
+
+	//enemy 추적해서
+	currentTime += DeltaTime;
+
+	if (currentTime > 0)
+	{
+		for (TActorIterator<AEnemyDinosaur> it(GetWorld()); it; ++it)
+		{
+			enemies = *it;
+		}
+		if (enemies != nullptr)
+		{
+
+		}
+		else
+		{
+				//없으면 finishcoin소환
+
+				//없으면 finishline소환
+		}
 	}
 }
 
