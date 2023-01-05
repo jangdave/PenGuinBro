@@ -48,10 +48,12 @@ public:
 
 	void OverTime(float otime);
 
+	class AEnemyDinosaur* enemies;
+
 private:
 	int32 lifeTime = 2;
 
-	float gameTimer = 11;
+	float gameTimer = 91;
 	
 	float overTime = 21;
 
