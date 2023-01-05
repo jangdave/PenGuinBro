@@ -4,7 +4,7 @@
 #include "BombRange.h"
 #include "Components/SphereComponent.h"
 #include "Components/MeshComponent.h"
-#include "EnemyDinosaur.h"
+#include "Enemy.h"
 #include "Kismet/Gameplaystatics.h"
 #include "BombRangeOne.h"
 #include "PlayerPenGuin.h"
@@ -56,7 +56,7 @@ void ABombRange::Tick(float DeltaTime)
 
 void ABombRange::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	AEnemyDinosaur* enemy = Cast<AEnemyDinosaur>(OtherActor);
+	AEnemy* enemy = Cast<AEnemy>(OtherActor);
 	APlayerPenguin* enemy1 = Cast<APlayerPenguin>(OtherActor);
 	ATong* tong = Cast<ATong>(OtherActor);
 	if (enemy != nullptr)

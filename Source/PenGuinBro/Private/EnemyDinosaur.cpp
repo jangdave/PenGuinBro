@@ -5,6 +5,7 @@
 #include "Components/BoxComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Kismet/Gameplaystatics.h"
+#include "Tong.h"
 
 // Sets default values
 AEnemyDinosaur::AEnemyDinosaur()
@@ -39,8 +40,6 @@ void AEnemyDinosaur::Tick(float DeltaTime)
 	direction = GetActorForwardVector();
 
 	SetActorLocation(GetActorLocation() + direction * moveSpeed * DeltaTime);
-
-
 }
 
 // Called to bind functionality to input
@@ -52,11 +51,12 @@ void AEnemyDinosaur::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 void AEnemyDinosaur::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-// 	ATong* tong = Cast<ATong>(OtherActor);
-// 
-// 	if (tong != nullptr)
-// 	{
-// 		
-// 	}
+	ATong* tong = Cast<ATong>(OtherActor);
+
+	if (tong != nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Tong"));
+		direction = direction * -1;
+	}
 }
 
