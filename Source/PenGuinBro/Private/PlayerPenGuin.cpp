@@ -10,6 +10,7 @@
 #include "RotFloor.h"
 #include "GameFramework/Actor.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Kismet/Gameplaystatics.h"
 
 // Sets default values
 APlayerPenguin::APlayerPenguin()
@@ -139,8 +140,5 @@ void APlayerPenguin::BombDrop()
 
 	GetWorld()->SpawnActor<APlayerBomb>(bombFactory, spawnPosition, spawnRotation, param);
 }
-
-
-
 
 //AdddMovementInput 벽에 비벼지지 않게 하는 기능

@@ -19,5 +19,8 @@ public:
 	class UTextBlock* gameOver;
 
 	void PrintOverGame();
+
+	UFUNCTION(BlueprintCallable)
+	void LevelReset();
 	
 };

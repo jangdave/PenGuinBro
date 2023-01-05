@@ -16,3 +16,9 @@ void UOverWidget::PrintOverGame()
 		gameOver->SetText(otimer);
 	}
 }
+
+void UOverWidget::LevelReset()
+{
+	//레벨을 다시 로드한다
+	UGameplayStatics::OpenLevel(GetWorld(), TEXT("1-1"));
+}
