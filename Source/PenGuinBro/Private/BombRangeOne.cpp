@@ -5,7 +5,7 @@
 #include "Components/SphereComponent.h"
 #include "Components/MeshComponent.h"
 #include "Kismet/Gameplaystatics.h"
-#include "EnemyDinosaur.h"
+#include "Enemy.h"
 #include "PlayerPenGuin.h"
 #include "Tong.h"
 #include "MyPenguinGameModeBase.h"
@@ -58,7 +58,7 @@ void ABombRangeOne::Tick(float DeltaTime)
 
 void ABombRangeOne::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	AEnemyDinosaur* enemy = Cast<AEnemyDinosaur>(OtherActor);
+	AEnemy* enemy = Cast<AEnemy>(OtherActor);
 	APlayerPenguin* enemy1 = Cast<APlayerPenguin>(OtherActor);
 	ATong* tong = Cast<ATong>(OtherActor);
 
