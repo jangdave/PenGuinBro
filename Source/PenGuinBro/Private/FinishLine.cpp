@@ -13,7 +13,7 @@ AFinishLine::AFinishLine()
 
 	boxComp=CreateDefaultSubobject<UBoxComponent>(TEXT("Box Coll"));
 	SetRootComponent(boxComp);
-	boxComp->SetBoxExtent(FVector(5.0f, 70.0f, 70.0f));
+	boxComp->SetBoxExtent(FVector(15.0f, 50.0f, 40.0f));
 	meshComp=CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Static Mesh"));
 	meshComp->SetupAttachment(RootComponent);
 
@@ -24,6 +24,7 @@ void AFinishLine::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	boxComp->SetGenerateOverlapEvents(true);
 }
 
 // Called every frame

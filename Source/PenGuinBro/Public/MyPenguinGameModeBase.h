@@ -26,7 +26,7 @@ public:
 	
 	UPROPERTY(EditAnywhere, Category=MyDefaultSetting)
 	TSubclassOf<class UOverWidget> overwidget;
-
+	
 	UFUNCTION(BlueprintPure)
 	FORCEINLINE int32 GetGameTimer(){ return gameTimer; }
 	
@@ -41,6 +41,12 @@ public:
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category=MyDefaultSetting)
 	TSubclassOf<class AGameOverGhost> ghost;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category=MyDefaultSetting)
+	TSubclassOf<class AFinishCoin> coin;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category=MyDefaultSetting)
+	TSubclassOf<class AFinishLine> line;
 
 	void GameTimer(float time);
 
@@ -61,11 +67,11 @@ private:
 	
 	class UOverWidget* over_UI;
 	
-	class AActor* target;
-
 	float currentTime = 0;
 
 	bool stop = false;
 
 	bool start = false;
+
+	bool gameon = false;
 };

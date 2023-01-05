@@ -31,4 +31,12 @@ public:
 
 	UFUNCTION()
 	void FinishTouch(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	
+	UPROPERTY(EditAnywhere, Category=CoinSettings)
+	TSubclassOf<class UEndWidget> endwidget;
+
+	UFUNCTION()
+	void ResetAttach();
+
+	class UEndWidget* end_UI;
 };

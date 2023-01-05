@@ -9,6 +9,8 @@
 #include "OverWidget.h"
 #include "GameOverGhost.h"
 #include "EnemyDinosaur.h"
+#include "FinishCoin.h"
+#include "FinishLine.h"
 
 AMyPenguinGameModeBase::AMyPenguinGameModeBase()
 {
@@ -33,6 +35,8 @@ void AMyPenguinGameModeBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
+	currentTime += DeltaTime;
+	
 	if (gameTimer > 0)
 	{
 		GameTimer(DeltaTime);
@@ -49,26 +53,20 @@ void AMyPenguinGameModeBase::Tick(float DeltaTime)
 	{
 		OverTime(DeltaTime);
 	}
-
-	//enemy 추적해서
-	currentTime += DeltaTime;
-
-	if (currentTime > 0)
+	
+	if (gameon != true)
 	{
-		for (TActorIterator<AEnemyDinosaur> it(GetWorld()); it; ++it)
+		AActor* target = UGameplayStatics::GetActorOfClass(GetWorld(), AEnemyDinosaur::StaticClass());
+		if (target != nullptr)
 		{
-			enemies = *it;
-		}
-		if (enemies != nullptr)
-		{
-
+		
 		}
 		else
 		{
-				//없으면 finishcoin소환
-
-				//없으면 finishline소환
-		}
+			GetWorld()->SpawnActor<AFinishCoin>(coin, FVector(810.0f, 120.0f, 85.0f), FRotator(0, 0, 0));
+			GetWorld()->SpawnActor<AFinishLine>(line, FVector(825.0f, 333.0f, 108.0f), FRotator(0, 0, 0));
+			gameon = true;
+		}	
 	}
 }
 
