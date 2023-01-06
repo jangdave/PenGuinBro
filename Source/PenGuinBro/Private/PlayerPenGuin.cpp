@@ -24,7 +24,6 @@ APlayerPenguin::APlayerPenguin()
 
 	//컨트롤러 로테이션 상속
 	//bUseControllerRotationYaw(true);
-
 }
 
 // Called when the game starts or when spawned
@@ -35,6 +34,8 @@ void APlayerPenguin::BeginPlay()
 	boxComp->OnComponentBeginOverlap.AddDynamic(this, &APlayerPenguin::OnOverlap);
 
 	GetWorld()->GetFirstPlayerController()->Possess(this);
+
+	startlocation = GetActorLocation();
 }
 
 // Called every frame
@@ -42,13 +43,11 @@ void APlayerPenguin::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	direction.Normalize();
+	//direction.Normalize();
 
-	FVector dir = GetActorLocation() + direction * moveSpeed * DeltaTime;
-	SetActorLocation(dir);
+	//FVector dir = GetActorLocation() + direction * moveSpeed * DeltaTime;
+	//SetActorLocation(dir);
 
-	
-	
 	//정수리 박스가 회전발판에 오버랩되면 -> isTouched가 트루면
 	if (isTouched){
 		//회전발판의 틱을 활성화 시킨다.
@@ -84,6 +83,9 @@ void APlayerPenguin::Tick(float DeltaTime)
 void APlayerPenguin::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+	PlayerInputComponent->BindAction("PushDown", IE_Pressed, this, &APlayerPenguin::PushDown);
+	PlayerInputComponent->BindAction("Desh", IE_Pressed, this, &APlayerPenguin::Desh);
 }
 
 void APlayerPenguin::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -139,6 +141,16 @@ void APlayerPenguin::BombDrop()
 	param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 
 	GetWorld()->SpawnActor<APlayerBomb>(bombFactory, spawnPosition, spawnRotation, param);
+}
+
+void APlayerPenguin::PushDown()
+{
+	
+}
+
+void APlayerPenguin::Desh()
+{
+	//LaunchCharacter(GetActorForwardVector(),true,false);
 }
 
 //AdddMovementInput 벽에 비벼지지 않게 하는 기능

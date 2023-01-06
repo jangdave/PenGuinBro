@@ -28,6 +28,8 @@ void AGameOverGhost::BeginPlay()
 
 	sphereComp->OnComponentBeginOverlap.AddDynamic(this, &AGameOverGhost::GhostOverlap);
 	sphereComp->SetGenerateOverlapEvents(true);
+
+	UGameplayStatics::PlaySound2D(this, ghostSound);
 }
 
 // Called every frame
@@ -43,10 +45,10 @@ void AGameOverGhost::Tick(float DeltaTime)
 		{
 			target = *it;
 		}
-		if (target != nullptr)
-		{
-			float temp = target->moveSpeed;
-		}
+		//if (target != nullptr)
+		//{
+		//	float temp = target->moveSpeed;
+		//}
 		if (target != nullptr)
 		{
 			//플레이어위치 - 나의 위치 = 갈 방향을 설정

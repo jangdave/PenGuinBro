@@ -35,6 +35,9 @@ public:
 	UPROPERTY(EditAnywhere, Category=CoinSettings)
 	TSubclassOf<class UEndWidget> endwidget;
 
+	UPROPERTY(EditDefaultsOnly, Category = CoinSettings)
+	class USoundBase* endSound;
+
 	UFUNCTION()
 	void ResetAttach();
 

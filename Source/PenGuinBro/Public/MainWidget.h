@@ -22,5 +22,4 @@ public:
 	class UTextBlock* lifeTime;
 
 	void PrintMainGame();
-
 };

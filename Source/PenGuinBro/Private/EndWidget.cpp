@@ -2,4 +2,5 @@
 
 
 #include "EndWidget.h"
-
+#include "MyPenguinGameModeBase.h"
+#include "Kismet/GameplayStatics.h"

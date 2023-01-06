@@ -30,15 +30,22 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = PlayerSettings)
 	TSubclassOf<class APlayerBomb> bombFactory;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = PlayerSettings)
-	float moveSpeed = 200;
-	
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = PlayerSettings)
+	//float moveSpeed = 200;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = PlayerSettings)
 	class UBoxComponent* boxComp;
+
+	UPROPERTY(EditAnywhere, Category = PlayerSettings)
+	float testValue;
 	
 	FVector direction;
 
 	class ARotFloor* rotFloor;
+
+	FVector startlocation;
+
+	FVector endlocation;
 
 	UFUNCTION()
 	void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
@@ -49,9 +56,17 @@ public:
 	UFUNCTION()
 	void ResetGravity();
 
+	float distance = 200.0f;
+
 private:
 	UFUNCTION(BlueprintCallable)
 	void BombDrop();
+	
+	UFUNCTION(BlueprintCallable)
+	void Desh();
+
+	UFUNCTION(BlueprintCallable)
+	void PushDown();
 
 	float rotTime = 0;
 	float rotCool = 1.0f;

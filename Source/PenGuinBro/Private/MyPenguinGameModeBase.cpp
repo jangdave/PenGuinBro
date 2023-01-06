@@ -29,6 +29,8 @@ void AMyPenguinGameModeBase::BeginPlay()
 
 		main_UI->PrintMainGame();
 	}
+
+	UGameplayStatics::PlaySound2D(this, backSound);
 }
 
 void AMyPenguinGameModeBase::Tick(float DeltaTime)
@@ -73,6 +75,7 @@ void AMyPenguinGameModeBase::Tick(float DeltaTime)
 void AMyPenguinGameModeBase::GameTimer(float time)
 {
 	gameTimer -= time;
+	
 	if (gameTimer <= 0)
 	{
 		gameTimer = 0.00f;

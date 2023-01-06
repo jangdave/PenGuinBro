@@ -17,5 +17,7 @@ class PENGUINBRO_API UEndWidget : public UUserWidget
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MySetting|End", meta = (BindWidget))
 	class UTextBlock* endGame;
+
+	void PrintEndGame();
 	
 };
