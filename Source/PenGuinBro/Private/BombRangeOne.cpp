@@ -69,7 +69,7 @@ void ABombRangeOne::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* 
 	else if (enemy1 != nullptr)
 	{
 		enemy1->Destroy();
-		
+
 		AGameModeBase* gm = UGameplayStatics::GetGameMode(this);
 		AMyPenguinGameModeBase* myGM = Cast<AMyPenguinGameModeBase>(gm);
 		myGM->LifeTime(1);

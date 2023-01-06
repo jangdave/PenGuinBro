@@ -37,8 +37,6 @@ void APlayerPenguin::BeginPlay()
 	boxComp->OnComponentBeginOverlap.AddDynamic(this, &APlayerPenguin::OnOverlap);
 
 	GetWorld()->GetFirstPlayerController()->Possess(this);
-
-	startlocation = GetActorLocation();
 }
 
 // Called every frame
@@ -96,8 +94,8 @@ void APlayerPenguin::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	PlayerInputComponent->BindAction("PushDown", IE_Pressed, this, &APlayerPenguin::PushDown);
-	PlayerInputComponent->BindAction("Desh", IE_Pressed, this, &APlayerPenguin::Desh);
+	//PlayerInputComponent->BindAction("PushDown", IE_Pressed, this, &APlayerPenguin::PushDown);
+	//PlayerInputComponent->BindAction("Desh", IE_Pressed, this, &APlayerPenguin::Desh);
 }
 
 void APlayerPenguin::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -157,14 +155,14 @@ void APlayerPenguin::BombDrop()
 	GetWorld()->SpawnActor<APlayerBomb>(bombFactory, spawnPosition, spawnRotation, param);
 }
 
-void APlayerPenguin::PushDown()
-{
-	
-}
+//void APlayerPenguin::PushDown()
+//{
+//	
+//}
 
-void APlayerPenguin::Desh()
-{
+//void APlayerPenguin::Desh()
+//{
 	//LaunchCharacter(GetActorForwardVector(),true,false);
-}
+//}
 
 //AdddMovementInput 벽에 비벼지지 않게 하는 기능
