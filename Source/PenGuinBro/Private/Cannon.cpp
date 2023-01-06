@@ -44,12 +44,17 @@ void ACannon::Tick(float DeltaTime)
 	if (isShootReady) {
 		//슛 애로우 위치와 방향으로 playerbomb을 생성하고
 		GetWorld()->SpawnActor<APlayerBomb>(bombFactory, shootArrow->GetComponentLocation(), shootArrow->GetComponentRotation());
-
-		bomb->boxComp->SetCollisionProfileName(TEXT("BombShotPreset"));
-		bomb->meshComp->SetCollisionProfileName(TEXT("BombShotPreset"));
-
 		//isShootReady를 거짓으로 바꿈
+
+		//1초 후 대포의 포신이 내려감
+		//FTimerHandle cannonRot;
+		//GetWorld()->GetTimerManager().SetTimer(cannonRot, this, &ACannon::ShootRot, 1, false);
+
 		isShootReady = false;
+	}
+	else
+	{
+		return;
 	}
 }
 
@@ -61,7 +66,16 @@ void ACannon::CannonShoot(UPrimitiveComponent* OverlappedComponent, AActor* Othe
 	{
 		//대포에 닿은 폭탄을 제거
 		bomb->Destroy();
+
+		
+
 		//isShootReady를 true로 변환
 		isShootReady = true;
 	}
 }
+
+// void ACannon::ShootRot()
+// {
+// 	AddActorLocalRotation(FRotator(0, 0, 30));
+// }
+

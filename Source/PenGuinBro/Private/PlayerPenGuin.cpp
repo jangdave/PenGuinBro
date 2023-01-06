@@ -22,6 +22,9 @@ APlayerPenguin::APlayerPenguin()
 	boxComp->SetupAttachment(RootComponent);
 	boxComp->SetBoxExtent(FVector(5.0f));
 
+	boxCompF = CreateDefaultSubobject<UBoxComponent>(TEXT("Box Collision For Foot"));
+	boxCompF->SetupAttachment(RootComponent);
+
 	//컨트롤러 로테이션 상속
 	//bUseControllerRotationYaw(true);
 }
@@ -52,6 +55,8 @@ void APlayerPenguin::Tick(float DeltaTime)
 	if (isTouched){
 		//회전발판의 틱을 활성화 시킨다.
 		rotFloor->SetActorTickEnabled(true);
+		GetCharacterMovement()->MaxWalkSpeed = 0;
+		//GetCharacterMovement()->RotationRate = FRotator(0,0,0);
 
 		rotTime += DeltaTime;
 		//로테이션 타임이 1초보다 크거나 같아지면
@@ -64,15 +69,22 @@ void APlayerPenguin::Tick(float DeltaTime)
 		//	isTouched = false;
 		//};
 
+
+		//GetCharacterMovement()->MaxWalkSpeed = 0;
+
 		//회전 시간이 1초에 가까워지면
-		if (rotTime >= 0.95f)
+		if (rotTime >= 1.0f)
 		{
 			//회전발판의 틱을 비활성화 시키고
 			rotFloor->SetActorTickEnabled(false);
 			rotFloor->SetActorRotation(FRotator(0,0,180));
 			//로테이션 타임을 0으로 초기화시킨다.
 			rotTime = 0;
+			GetCharacterMovement()->MaxWalkSpeed = 400;
+			//GetCharacterMovement()->RotationRate = FRotator(0,0,3000);
 			isTouched = false;
+
+
 		};
 	}
 
@@ -96,6 +108,8 @@ void APlayerPenguin::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor*
 	
 	if (rotFloor != nullptr)
 	{
+		isOnFloor = true;
+
 		//플레이어를 X축으로 180도 회전시키고
 		SetActorRotation(FRotator(180, 0, 0));
 
