@@ -54,8 +54,6 @@ public:
 
 	void OverTime(float otime);
 
-	class AEnemyDinosaur* enemies;
-
 private:
 	int32 lifeTime = 2;
 

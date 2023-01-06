@@ -8,7 +8,7 @@
 #include "EngineUtils.h"
 #include "OverWidget.h"
 #include "GameOverGhost.h"
-#include "EnemyDinosaur.h"
+#include "Enemy.h"
 #include "FinishCoin.h"
 #include "FinishLine.h"
 
@@ -56,7 +56,7 @@ void AMyPenguinGameModeBase::Tick(float DeltaTime)
 	
 	if (gameon != true)
 	{
-		AActor* target = UGameplayStatics::GetActorOfClass(GetWorld(), AEnemyDinosaur::StaticClass());
+		AActor* target = UGameplayStatics::GetActorOfClass(GetWorld(), AEnemy::StaticClass());
 		if (target != nullptr)
 		{
 		
