@@ -66,6 +66,8 @@ void ABombRange::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Oth
 	else if (enemy1 != nullptr)
 	{
 		enemy1->Destroy();
+		//enemy1->SetActorLocation(FVector(808.0f, -370.0f, -184.0f));
+		//enemy1->SetActorRotation(FRotator(0, 90.0f, 0));
 
 		AGameModeBase* gm = UGameplayStatics::GetGameMode(this);
 		AMyPenguinGameModeBase* myGM = Cast<AMyPenguinGameModeBase>(gm);
