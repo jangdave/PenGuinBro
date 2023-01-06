@@ -48,17 +48,19 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category=MyDefaultSetting)
 	TSubclassOf<class AFinishLine> line;
 
+	UPROPERTY(EditDefaultsOnly, Category = MyDefaultSetting)
+	class USoundBase* backSound;
+
 	void GameTimer(float time);
 
 	void LifeTime(int32 count);
 
 	void OverTime(float otime);
 
+	float gameTimer = 41;
 private:
 	int32 lifeTime = 2;
-
-	float gameTimer = 91;
-	
+		
 	float overTime = 21;
 
 	class UMainWidget* main_UI;

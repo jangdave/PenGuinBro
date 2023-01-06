@@ -18,6 +18,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MySetting|Over", meta = (BindWidget))
 	class UTextBlock* gameOver;
 
+	UPROPERTY(EditDefaultsOnly, Category = MyDefaultSetting)
+	class USoundBase* overSound;
+
 	void PrintOverGame();
 
 	UFUNCTION(BlueprintCallable)

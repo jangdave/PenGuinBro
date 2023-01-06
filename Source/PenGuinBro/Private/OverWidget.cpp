@@ -5,6 +5,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "MyPenguinGameModeBase.h"
 #include "Components/TextBlock.h"
+#include "Kismet/GameplayStatics.h"
 
 void UOverWidget::PrintOverGame()
 {
@@ -14,6 +15,8 @@ void UOverWidget::PrintOverGame()
 	{
 		FText otimer = FText::AsNumber(myGM->GetOverTime());
 		gameOver->SetText(otimer);
+
+		UGameplayStatics::PlaySound2D(this, overSound);
 	}
 }
 

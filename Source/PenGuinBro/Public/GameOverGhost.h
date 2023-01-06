@@ -29,6 +29,9 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = GhostSettings)
 	class UStaticMeshComponent* meshComp;
 
+	UPROPERTY(EditDefaultsOnly, Category = MyDefaultSetting)
+	class USoundBase* ghostSound;
+
 	FVector direction;
 
 	float moveSpeed = 30.0f;

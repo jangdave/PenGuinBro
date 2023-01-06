@@ -55,6 +55,8 @@ void AFinishCoin::FinishTouch(UPrimitiveComponent* OverlappedComponent, AActor* 
 			end_UI->AddToViewport();
 		}
 
+		UGameplayStatics::PlaySound2D(this, endSound);
+
 		//게임시간 스탑
 		UGameplayStatics::SetGlobalTimeDilation(GetWorld(), 0);
 	}
