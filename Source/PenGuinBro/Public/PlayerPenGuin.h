@@ -35,6 +35,9 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = PlayerSettings)
 	class UBoxComponent* boxComp;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = PlayerSettings)
+	class UBoxComponent* boxCompF;
 	
 	FVector direction;
 
@@ -48,6 +51,8 @@ public:
 
 	UFUNCTION()
 	void ResetGravity();
+
+	bool isOnFloor = false;
 
 private:
 	UFUNCTION(BlueprintCallable)

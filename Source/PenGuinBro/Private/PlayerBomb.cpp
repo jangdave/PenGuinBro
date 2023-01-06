@@ -40,6 +40,8 @@ void APlayerBomb::Tick(float DeltaTime)
 
 	if (currentTime > explosionTime)
 	{
+		//FActorSpawnParameters param;
+		//param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 		GetWorld()->SpawnActor<ABombRange>(bombRange, GetActorTransform());
 		
 		Destroy();
