@@ -47,12 +47,24 @@ public:
 	void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 	UFUNCTION()
+	void FootOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	UFUNCTION()
 	void ResetAttach();
 
 	UFUNCTION()
 	void ResetGravity();
 
+	UFUNCTION()
+	void DownRotation();
+
 	bool isOnFloor = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = PlayerSettings)
+	bool isFootOnFloor = false;
+
+	UFUNCTION(BlueprintCallable)
+	void PushDown();
 
 private:
 	UFUNCTION(BlueprintCallable)

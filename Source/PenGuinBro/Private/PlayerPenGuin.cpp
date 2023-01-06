@@ -35,6 +35,7 @@ void APlayerPenguin::BeginPlay()
 	Super::BeginPlay();
 	
 	boxComp->OnComponentBeginOverlap.AddDynamic(this, &APlayerPenguin::OnOverlap);
+	boxCompF->OnComponentBeginOverlap.AddDynamic(this, &APlayerPenguin::FootOverlap);
 
 	GetWorld()->GetFirstPlayerController()->Possess(this);
 }
@@ -129,12 +130,23 @@ void APlayerPenguin::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor*
 	
 }
 
+void APlayerPenguin::FootOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	rotFloor = Cast<ARotFloor>(OtherActor);
+
+	if (rotFloor != nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("foot overlap"));
+		isFootOnFloor = true;
+	}
+}
+
 void APlayerPenguin::ResetAttach()
 {
 	//붙여놨던 부모를 해제한다.
 	DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 
-	if (GetActorRotation() == FRotator(180, 0, 0))
+	if (GetActorRotation() == FRotator(180, 0, 0) || GetActorRotation() == FRotator(-180,0,0))
 	{
 		AddActorWorldRotation(FRotator(-180,0,0));
 	}
@@ -143,6 +155,11 @@ void APlayerPenguin::ResetAttach()
 void APlayerPenguin::ResetGravity()
 {
 	GetCharacterMovement()->GravityScale = 1;
+}
+
+void APlayerPenguin::DownRotation()
+{
+	SetActorRotation(FRotator(180,0,0));
 }
 
 void APlayerPenguin::BombDrop()
@@ -155,14 +172,40 @@ void APlayerPenguin::BombDrop()
 	GetWorld()->SpawnActor<APlayerBomb>(bombFactory, spawnPosition, spawnRotation, param);
 }
 
-//void APlayerPenguin::PushDown()
-//{
-//	
-//}
+void APlayerPenguin::PushDown()
+{
+	if (isFootOnFloor)
+	{
+		//회전발판에 attach
+		AttachToActor(rotFloor, FAttachmentTransformRules::KeepWorldTransform);
+		//중력값 0으로
+		GetCharacterMovement()->GravityScale = 0;
+		//회전발판 틱 켜기
+		isTouched = true;
+		//2초 후 리셋 그래비티
+		FTimerHandle gravityTimer;
+		GetWorld()->GetTimerManager().SetTimer(gravityTimer, this, &APlayerPenguin::ResetGravity, 2, false);
 
-//void APlayerPenguin::Desh()
-//{
-	//LaunchCharacter(GetActorForwardVector(),true,false);
-//}
+		//2초 후 리셋 어태치
+		FTimerHandle snapTimer;
+		GetWorld()->GetTimerManager().SetTimer(snapTimer, this, &APlayerPenguin::ResetAttach, 2, false);
+
+		//2초 후 플레이어 X축으로 180도 회전
+		FTimerHandle footTimer;
+		GetWorld()->GetTimerManager().SetTimer(footTimer, this, &APlayerPenguin::DownRotation, 2, false);
+
+		isFootOnFloor = false;
+
+	}
+	else
+	{
+		return;
+	}
+}
+
+// void APlayerPenguin::Desh()
+// {
+// 	//LaunchCharacter(GetActorForwardVector(),true,false);
+// }
 
 //AdddMovementInput 벽에 비벼지지 않게 하는 기능
